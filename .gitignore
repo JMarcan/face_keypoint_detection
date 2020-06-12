@@ -1,0 +1,5 @@
+# Ignore all files in the folder data
+data
+
+# Ignore all files in the folder images
+images
