@@ -26,7 +26,8 @@ class Net(nn.Module):
         self.pool1 = nn.MaxPool2d(2, 2)
         
         # Fully connected layer
-        self.fc1 = nn.Linear(128, 136)
+        self.fc1 = nn.Linear(387200, 136)
+        self.drop1 = nn.Dropout(p=0.5)
         
         
     def forward(self, x):
@@ -47,11 +48,11 @@ class Net(nn.Module):
         x = self.pool1(x)
         
         # Fully connected layer
-        # prep for linear layer by flattening the feature maps into feature vectors
-        x = x.view(x.size(0), -1)
-        # Linear Layer
-        x = self.fc1(x)
         
+        # prep for linear layer by flattening the feature maps into feature vectors
+        x = x.view(x.size(0), -1) 
+            
+        x = self.fc1(x)
         x = F.relu(x)
         x = self.drop1(x)
         
