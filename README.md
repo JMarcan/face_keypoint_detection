@@ -34,23 +34,19 @@ For facial keypoints detection, I used Adam optimizer. It appeared to perform be
 
 For CNN architecture, first I used a simple architecture consisting of:
 
-`Net(
-(conv1): Conv2d
-(pool1): MaxPool2d
-(fc1): Linear
-)`
+- `(conv1): Conv2d`
+- `(pool1): MaxPool2d`
+- `(fc1): Linear`
 
 The training was fast, but results needed improvement. To achieve this, I extended the network to consist of:
 
-`Net(
-(conv1): Conv2d(1, 32, kernel_size=(5, 5), stride=(1, 1))
-(pool1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-(conv2): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))
-(pool2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-(fc1): Linear(in_features=179776, out_features=3000, bias=True)
-(fc2): Linear(in_features=3000, out_features=500, bias=True)
-(fc3): Linear(in_features=500, out_features=136, bias=True)
-)`
+- `(conv1): Conv2d(1, 32, kernel_size=(5, 5), stride=(1, 1))`
+- `(pool1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)`
+- `(conv2): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))`
+- `(pool2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)`
+- `(fc1): Linear(in_features=179776, out_features=3000, bias=True)`
+- `(fc2): Linear(in_features=3000, out_features=500, bias=True)`
+- `(fc3): Linear(in_features=500, out_features=136, bias=True)`
 
 This significantly improved the results. However, as the model complexity increased, the training became too slow on CPU. To deal with this, I added GPU support and trained it on GPU. It took around 10 minutes for seven epochs.
 
